@@ -1,1 +1,1 @@
-angular.module('quoteBook', ['angular-toArrayFilter']);
+angular.module('quoteBook', []);
