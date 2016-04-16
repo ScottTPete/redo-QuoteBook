@@ -12,10 +12,10 @@
 	
 	<h1>QuoteBook</h1>
 	
-	<input placeholder="Quote..." ng-model="quote.text"><input placeholder="Author..." ng-model="quote.author"><button ng-click="addQuote()">Add Quote</button> 
+	<input placeholder="Quote..." ng-model="quote.text"><input placeholder="Author..." ng-model="quote.author"><button ng-click="saveQuote(quote)">Add Quote</button> 
 	<div class="quoteContainer">
-		<input placeholder="Search for Quote" ng-model='filterQuote'>
-		<ul ng-repeat="quote in quotes | filter: filterQuote">
+		<input placeholder="Search for a Quote" ng-model='filterQuote'>
+		<ul ng-repeat="quote in quotes">
 			<li>{{quote.text}} by: {{quote.author}} <button ng-click="removeQuote(quote)">Remove</button></li>
 		</ul>
 	
@@ -28,6 +28,7 @@
 	<script src="js/app.js"></script>
 	<script src="js/services/dataService.js"></script>
 	<script src="js/controllers/mainCtrl.js"></script>
+	<script src="js/toArrayFilter.js"></script>
 </body>
 
 </html>

@@ -1,24 +1,27 @@
 angular.module('quoteBook')
 	.controller('mainCtrl', function($scope, dataSvc) {
 		
+	$scope.quotes = dataSvc.checkForQuotes();
 	
-	$scope.quotes = dataSvc.getQuotes();
-	
-	
-	$scope.addQuote = function() {
-	//create an object with properties of text and author(Req by service). bound to inputs on view using ng-model
-		$scope.quote = {
+	$scope.saveQuote = function(quote) {
+		//create an object with properties of text and author(Req by service). bound to inputs on view using ng-model
+	/*	$scope.quote = {
 			text: $scope.quote.text,
 			author: $scope.quote.author
-		}
-		
+		}*/
+
 		//call service function add quote and pass in object
-		dataSvc.addQuote($scope.quote);
-		
+		console.log(quote);
+		dataSvc.saveQuote(quote);
+
 		//updates scope
-		dataSvc.getQuotes();
-		
+		dataSvc.checkForQuotes();
+
 	};
+	
+	
+	
+	
 	
 	$scope.removeQuote = function(quote) {
 		dataSvc.removeQuote(quote);
