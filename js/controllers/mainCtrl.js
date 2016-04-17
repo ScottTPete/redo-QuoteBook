@@ -22,13 +22,13 @@ angular.module('quoteBook')
 		dataSvc.removeQuote(quotesArr, index);
 	}
 	
-//	$scope.toggleFilter = function() {
-//		if ($scope.filterType === "") {
-//			$scope.filterType = $scope.quote
-//		} else {
-//			$scope.filterType = "";
-//		}
-//	}
-	 
+	/*$scope.toggleFilter = function() {
+		if ($scope.filterType === "") {
+			$scope.filterType = $scope.quote
+		} else {
+			$scope.filterType = "";
+		}
+	}
+	 */
 	
 })

@@ -47,6 +47,9 @@ angular.module('quoteBook')
 	this.removeQuote = function (quotesArr, index) {
 		console.log(quotesArr[index]);
 		quotesArr.splice(index, 1);
+		updateQuotesStorage();
+		
+		console.log(localStorage['quotes'])
 
 		
 		
