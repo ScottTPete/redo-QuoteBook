@@ -1,59 +1,39 @@
 angular.module('quoteBook')
-	.service('dataSvc', function () {
+	.service('dataSvc', function() {
 	
+	var quotes = [
+		{ text: 'Life isn\'t about getting and having, it\'s about giving and being.', author: 'Kevin Kruse'},
+		{ text: 'Whatever the mind of man can conceive and believe, it can achieve', author: 'Napoleon Hill'},
+		{ text: 'Strive not to be a success, but rather to be of value.', author: 'Albert Einstein'},
+		{ text: 'Two roads diverged in a wood, and I took the one less traveled by, And that has made all the difference.', author: 'Robert Frost'},
+		{ text: 'The most difficult thing is the decision to act, the rest is merely tenacity.', author: 'Amelia Earhart'},
+		{ text: 'Life is what happens to you while you\'re busy making other plans.', author: 'John Lennon'},
+		{ text: 'What even is a jQuery?', author: 'Tyler S. McGinnis'}
+	];
 
-		//This creates an array around our 'quotes' key in localstorage. Local storage an only take strings so we are converting our Object to a string.
-				var quoteList = [];
-				quoteList.push(JSON.parse(localStorage.getItem('quotes')));
-				localStorage.setItem('quotes', JSON.stringify(quoteList));
-		//////////////////////////////////////////////////////////
+	this.getQuotes = function () {
+		return quotes;
+	};
 
-		this.getQuotes = function () {
-			if (localStorage['quotes']) {
-				return JSON.parse(localStorage.getItem('quotes'))
-			} else {
-				alert('You have no quotes in your quote!')
-			}
-		};
+	//if user is adding a quote make sure they have both text and author, if so add to quotes array. otherwise log an err message
+	this.addQuote = function (quote) {
+		if(quote.text && quote.author) {
+			quotes.push(quote);
+		} else {
+			console.log("Quote couldn't be added. Make sure you have text and an author")
+		}
+	};
 
-		this.addQuote = function (quote) {
+	//loop through quotes array and if the quote text is the same, remove quote at index. if not log err message
+	this.removeQuote = function (quote) {
+		
+		quotes.splice(quote, 1);
 
-			console.log(quote)
-
-			//check if a quotes key doesnt exist in local storage and that the user has filled out the both quote and author. If true create a new quotes key and give it a value of the quote.
-			if (!localStorage.getItem('quotes') && quote.hasOwnProperty('text') && quote.hasOwnProperty('author')) {
-
-				//turns quote object into a string so local storage can read it.
-				localStorage.setItem('quotes', JSON.stringify(quote));
-
-				//if quotes key exists in storage and user passed in both author and quote. push that quote to storage array as atring
-			} else if (quote.hasOwnProperty('text') && quote.hasOwnProperty('author')) {
-
-				quoteList = JSON.parse(localStorage.getItem('quotes'))
-
-				quoteList.push(quote);
-
-				localStorage.setItem('quotes', JSON.stringify(quoteList));
-
-
-				//if no author or no quote was submitted alert user his save attempt failed 		
-			} else {
-
-				alert("Couldn't save the quote. Make sure you have filled out both the quote and the author.")
-			}
-			console.log(localStorage['quotes']);
-		};
-
-
-		this.removeQuote = function (quote) {
-
-			localStorage.removeItem('quotes', quote)
-
-
-
-		};
-
-
-
-
-	})
+		
+		
+	};
+	
+	
+	
+	
+})
