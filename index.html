@@ -12,11 +12,12 @@
 	
 	<h1>QuoteBook</h1>
 	
-	<input placeholder="Quote..." ng-model="quote.text"><input placeholder="Author..." ng-model="quote.author"><button ng-click="addQuote()">Add Quote</button> 
+	<input placeholder="Quote..." ng-model="quote.text"><input placeholder="Author..." ng-model="quote.author"><button ng-click="addQuote(quote)">Add Quote</button> 
+	<button ng-click="toggleFilter()">Filter</button>
 	<div class="quoteContainer">
 		<input placeholder="Search for Quote" ng-model='filterQuote'>
-		<ul ng-repeat="quote in quotes | filter: filterQuote">
-			<li>{{quote.text}} by: {{quote.author}} <button ng-click="removeQuote(quote)">Remove</button></li>
+		<ul ng-repeat="quote in quotes track by $index">
+			<li>{{quote.text}} by: {{quote.author}} <button ng-click="removeQuote(quotes, $index)">Remove</button></li>
 		</ul>
 	
 	</div>

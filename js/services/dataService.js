@@ -15,19 +15,38 @@ angular.module('quoteBook')
 		return quotes;
 	};
 
-	//if user is adding a quote make sure they have both text and author, if so add to quotes array. otherwise log an err message
+	
+	//if user submitted both quote and author push that quote to the quotes array. 
 	this.addQuote = function (quote) {
 		if(quote.text && quote.author) {
 			quotes.push(quote);
+			
+			//runs that function to add new quote to local storage.
+			updateQuotesStorage()
+			
+			console.log(localStorage['quotes'])
 		} else {
-			console.log("Quote couldn't be added. Make sure you have text and an author")
+			//alerts if user didn't have both quote and author.
+			alert("Quote couldn't be added. Make sure you have text and an author");
 		}
 	};
+	
+	function updateQuotesStorage () {
+		localStorage.setItem('quotes', JSON.stringify(quotes))
+	};
+	
+	this.getQuotesFromStorage = function () {
+		if(localStorage['quotes']) {
+			quotes = JSON.parse(localStorage['quotes'])
+		} else {
+			localStorage.setItem('quotes', JSON.stringify(quotes));
+		}
+	}
 
-	//loop through quotes array and if the quote text is the same, remove quote at index. if not log err message
-	this.removeQuote = function (quote) {
-		
-		quotes.splice(quote, 1);
+	//if user clicks remove, removes the quote at that index.
+	this.removeQuote = function (quotesArr, index) {
+		console.log(quotesArr[index]);
+		quotesArr.splice(index, 1);
 
 		
 		
