@@ -11,12 +11,23 @@
 <body ng-controller="mainCtrl">
 	
 	<h1>QuoteBook</h1>
-	
-	<input placeholder="Quote..." ng-model="quote.text"><input placeholder="Author..." ng-model="quote.author"><button ng-click="addQuote(quote)">Add Quote</button> 
-	<button ng-click="toggleFilter()">Filter</button>
+	<div class="quoteOptionsContainer">
+		<input placeholder="Add Quote..." ng-model="quote.text"><input placeholder=" Add Author..." ng-model="quote.author"><button ng-click="addQuote(quote)">Add Quote</button>
+		<h3>Sort By:</h3>
+		<select ng-model="sortBy">
+			<option value="text">Text</option>
+			<option value="author">Author</option>
+		</select>
+		<select ng-model="sortOrder">
+			<option value="-">A - Z</option>
+			<option value="+">Z - A</option>
+		</select>
+
+	</div>	
 	<div class="quoteContainer">
-		<input placeholder="Search for Quote" ng-model='filterQuote'>
-		<ul ng-repeat="quote in quotes track by $index">
+		<h3>Search Quotes:</h3>
+		<input placeholder="Search for Quote" ng-model='searchQuotes'>
+		<ul ng-repeat="quote in quotes | toArray: false | filter: searchQuotes | orderBy: sortBy : checkSort()">
 			<li>{{quote.text}} by: {{quote.author}} <button ng-click="removeQuote(quotes, $index)">Remove</button></li>
 		</ul>
 	
@@ -29,6 +40,7 @@
 	<script src="js/app.js"></script>
 	<script src="js/services/dataService.js"></script>
 	<script src="js/controllers/mainCtrl.js"></script>
+	<script src="js/toArrayFilter.js"></script>
 </body>
 
 </html>
